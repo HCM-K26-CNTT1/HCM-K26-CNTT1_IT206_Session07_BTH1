@@ -141,6 +141,10 @@ Bạn cứ trả lời theo cách hiểu của mình, hoặc viết thử một 
 ### **Phần Rubric**
 ---
 
+Chào bạn! Mình sẽ đánh giá đoạn code tìm giá trị lớn nhất này theo đúng Rubric 4 tiêu chí trong skill, với tinh thần khách quan, thẳng thắn và dễ hiểu nhất cho người mới học Python. *(Lưu ý: mình phân tích dựa trên logic code bạn gửi, không tự nhận đã chạy thực thi).*
+
+---
+
 ### 1 & 2. Chấm điểm từng tiêu chí và tính tổng điểm
 
 Hãy tưởng tượng việc tìm số lớn nhất giống như **cầm một tờ giấy ghi "kỷ lục hiện tại"** rồi đi hỏi từng bạn trong lớp xem có ai cao hơn không. Nếu có bạn cao hơn, bạn cập nhật lại kỷ lục.
@@ -163,7 +167,7 @@ $$\text{Tổng điểm} = 6.0 \times 0.4 + 8.0 \times 0.3 + 5.5 \times 0.2 + 2.0
 ### 3. Bảng điểm Markdown
 
 | Tiêu chí | Trọng số | Điểm (thang 10) | Điểm quy đổi | Nhận xét ngắn |
-| --- | --- | --- | --- | --- |
+| :--- | :---: | :---: | :---: | :--- |
 | **Correctness** | 40% | 6.0 | 2.40 | Logic cốt lõi đúng nhưng lỗi thụt lề trong hàm làm hỏng cú pháp |
 | **Efficiency** | 30% | 8.0 | 2.40 | Thời gian $O(n)$, bộ nhớ $O(1)$; chưa tối ưu bằng `max()` có sẵn |
 | **Code Style & Readability** | 20% | 5.5 | 1.10 | Đặt tên biến rõ ràng, nhưng sai thụt lề và thiếu chú thích/docstring |
@@ -175,13 +179,11 @@ $$\text{Tổng điểm} = 6.0 \times 0.4 + 8.0 \times 0.3 + 5.5 \times 0.2 + 2.0
 ### 4. Ưu điểm và nhược điểm của code
 
 #### Ưu điểm
-
 * **Tư duy thuật toán tự nhiên, dễ theo dõi:** Cách giữ một biến lưu giá trị lớn nhất tạm thời rồi so sánh lần lượt từng phần tử rất sát với cách con người so sánh thực tế.
 * **Không dùng thêm bộ nhớ phình to:** Chỉ lưu một biến `max_num` nên dù danh sách có 10 hay 100.000 số, bộ nhớ thêm vào vẫn là hằng số $O(1)$.
 * **Đặt tên biến có ý nghĩa:** `find_max`, `numbers`, `max_num` giúp người đọc đoán được vai trò từng thành phần mà không cần suy luận nhiều.
 
 #### Nhược điểm
-
 * **Sai thụt lề (`IndentationError`):** Dòng `max_num = numbers[0]` nằm ngang hàng với `def` thay vì thụt vào 4 dấu cách bên trong thân hàm. Trong Python, thụt lề là cú pháp bắt buộc để xác định khối lệnh.
 * **Dễ crash khi gặp dữ liệu biên:** Không kiểm tra danh sách rỗng trước khi lấy chỉ số `[0]`, và không kiểm tra kiểu dữ liệu nếu có phần tử không so sánh được.
 * **Thiếu chú thích và tách bạch code chạy thử:** Không có docstring mô tả đầu vào/đầu ra, và phần `print(...)` dính sát ngay dưới `return` làm giảm độ thoáng khi đọc.
@@ -214,40 +216,3 @@ def find_max(numbers):
 if __name__ == "__main__":
     sample_numbers = [3, 8, 2, 10, 5]
     print(find_max(sample_numbers))
-
-```
-
-*(Mẹo nhỏ cho người mới: khi đã nắm chắc cách viết vòng lặp này, trong các bài toán thực tế bạn có thể dùng hàm có sẵn `max(numbers)` của Python).*
-
----
-
-### 6. Phân tích danh sách rỗng và các trường hợp đặc biệt khác
-
-1. **Danh sách rỗng (`[]`):**
-* **Ở code gốc:** Khi gọi `find_max([])`, biểu thức `numbers[0]` cố lấy phần tử đầu tiên của một danh sách không có phần tử nào, gây ra lỗi `IndexError: list index out of range` và dừng chương trình.
-* **Cách xử lý:** Tùy yêu cầu bài toán, bạn có thể `raise ValueError(...)` (như code cải thiện ở trên để báo lỗi rõ ràng) hoặc `return None` nếu đề bài quy định trả về `None` khi không có dữ liệu.
-
-
-2. **Danh sách chỉ có 1 phần tử (ví dụ `[-7]` hoặc `[0]`):**
-* `max_num` được gán bằng `numbers[0]`, vòng lặp chạy 1 lần với chính phần tử đó, điều kiện `num > max_num` là `False`, và hàm trả về đúng phần tử duy nhất đó.
-
-
-3. **Danh sách toàn số âm (ví dụ `[-15, -3, -99]`):**
-* Nhiều người mới hay mắc sai lầm gán `max_num = 0` — nếu làm vậy, kết quả sẽ sai thành `0` dù `0` không có trong danh sách! Cách khởi tạo `max_num = numbers[0]` như ý tưởng của bạn là đúng cho trường hợp toàn số âm vì `max_num` bắt đầu từ `-15`, sau đó so sánh tiếp với `-3` (`-3 > -15` là `True` nên cập nhật thành `-3`).
-
-
-4. **Các phần tử trùng nhau hoặc chứa số thực (`float`) / số lớn:**
-* Với `[5, 5, 5]`, `5 > 5` là `False` nên `max_num` giữ nguyên `5` và chạy bình thường. Với số thực như `[1.5, 2.25, 0.5]`, toán tử `>` vẫn so sánh được bình thường.
-
-
-5. **Kiểu dữ liệu không đồng nhất hoặc không so sánh được (ví dụ `[1, "hai", 3]` hoặc `[None, 1]`):**
-* Khi so sánh `num > max_num` giữa số và chuỗi hoặc `None`, Python sẽ phát sinh `TypeError`. Với người mới học, cần chú ý truyền đúng danh sách các giá trị có thể so sánh được với nhau.
-
-
-
----
-
-### Câu hỏi kiểm tra nhanh cho bạn
-
-1. Nếu truyền `[-20, -5, -12]` vào logic khởi tạo `max_num = numbers[0]`, giá trị của `max_num` sẽ thay đổi thế nào qua từng bước của vòng lặp?
-2. Vì sao dòng `if not numbers:` cần được đặt **trước** dòng `max_num = numbers[0]`?
