@@ -140,11 +140,34 @@ Bạn cứ trả lời theo cách hiểu của mình, hoặc viết thử một 
 
 ### **Phần Rubric**
 ---
+**Sinh viên hỏi**
 
-Chào bạn! Mình sẽ đánh giá đoạn code tìm giá trị lớn nhất này theo đúng Rubric 4 tiêu chí trong skill, với tinh thần khách quan, thẳng thắn và dễ hiểu nhất cho người mới học Python. *(Lưu ý: mình phân tích dựa trên logic code bạn gửi, không tự nhận đã chạy thực thi).*
+Hãy đánh giá đoạn code Python dưới đây theo Rubric Assessment đã được thiết lập trong Skill.
+
+def find_max(numbers):
+    max_num = numbers[0]
+
+    for num in numbers:
+        if num > max_num:
+            max_num = num
+
+    return max_num
+
+print(find_max([3, 8, 2, 10, 5]))
+
+Yêu cầu:
+1. Chấm điểm từng tiêu chí Correctness (40%), Efficiency (30%), Code Style & Readability (20%), Edge Cases (10%) theo thang điểm 10.
+2. Tính tổng điểm theo đúng công thức trọng số.
+3. Trình bày bảng điểm Markdown.
+4. Nêu ưu điểm và nhược điểm của code.
+5. Đề xuất phiên bản code cải thiện, kèm comment giải thích.
+6. Phân tích trường hợp danh sách rỗng và các trường hợp đặc biệt khác.
+
+Không tự nhận đã chạy code nếu chưa thực sự kiểm thử. Giải thích bằng tiếng Việt, phù hợp với sinh viên mới học Python.
 
 ---
 
+**AI trả lời**
 ### 1 & 2. Chấm điểm từng tiêu chí và tính tổng điểm
 
 Hãy tưởng tượng việc tìm số lớn nhất giống như **cầm một tờ giấy ghi "kỷ lục hiện tại"** rồi đi hỏi từng bạn trong lớp xem có ai cao hơn không. Nếu có bạn cao hơn, bạn cập nhật lại kỷ lục.
